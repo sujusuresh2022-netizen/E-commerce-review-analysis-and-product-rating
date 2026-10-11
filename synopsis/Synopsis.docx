@@ -1,0 +1,105 @@
+ 
+ACHARYA INSTITUTE OF TECHNOLOGY
+Department of MCA
+
+PROJECT SYNOPSIS 
+
+Semester:  2nd and 3rd 
+Guide Name: Prof. Sumit Singha Chowdhury
+Institution Name: Acharya Institute of Technology
+Name of the Student: Sujan KS
+USN: 1AY25MC065
+AUID: AIT25MCAV005
+Title: E-Commerce Review Analyzer and Product Rating Predictor
+
+
+
+
+
+E-COMMERCE REVIEW ANALYZER AND PRODUCT RATING PREDICTOR
+1.	Abstract
+In the present digital era, users frequently use e-commerce applications to purchase products and submit product reviews daily. Manually analysing these reviews to understand customer sentiment and predict product ratings is time-consuming and impractical for businesses. The "E-Commerce Review Analyzer and Product Rating Predictor" automatically processes and analyses customer reviews using Natural Language Processing and deep learning techniques to predict ratings. The system first cleans the review text by removing noise and unnecessary elements. It then extracts meaningful features using TF-IDF for baseline models and contextual embeddings from transformer models for the deep learning pipeline. For sentiment classification and rating prediction, a multi-task learning model is implemented: a shared Robustly Optimized BERT Pretraining Approach encoder with two task-specific heads — one for 3-class sentiment classification (positive, negative, neutral) and one for 5-class rating prediction (1–5). This architecture avoids the circular dependency of predicting rating from sentiment. The system additionally extracts product aspects and provides prediction explanations, all presented through an interactive dashboard.
+2.	Introduction
+Online shopping has become a routine activity, and e-commerce platforms such as Amazon and Flipkart receive millions of product reviews daily. These reviews contain valuable customer feedback, but their volume makes manual analysis impractical. Businesses require automated methods to extract sentiment and predict product quality from review text.
+Sentiment analysis using deep learning has advanced significantly with transformer-based models such as BERT and RoBERTa, which capture contextual meaning better than keyword-based approaches. However, most existing systems address sentiment classification and rating prediction as separate tasks, lack cross-category generalization, and provide no explanation for their predictions.The "E-Commerce Review Analyzer and Product Rating Predictor" addresses these gaps. It classifies reviews by sentiment, predicts ratings, identifies product aspects, and presents results through a visual dashboard. The system is trained on real Amazon review data across multiple product categories to support cross-category evaluation.
+3.	Problem Statement
+E-commerce platforms generate millions of product reviews every day, but businesses cannot read and analyse each review manually to understand customer feedback. This leads to  delayed response to issues, and missed opportunities for product improvement. Additionally, there is often a mismatch between ratings and actual review content, and many customers leave reviews without ratings, making it difficult to accurately predict product quality. Existing sentiment analysis methods struggle with unstructured text, resulting in inaccurate predictions. Therefore, there is a clear need for an automated system that can efficiently analyse product reviews, classify sentiments accurately, predict reliable ratings, and provide meaningful insights to help businesses make data-driven decisions and improve customer satisfaction.
+
+4.	Objectives
+1.	To develop a multi-task learning model with a shared RoBERTa encoder and two task-specific heads: one for 3-class sentiment classification (positive, negative, neutral) and one for 5-class rating prediction (1–5).
+2.	To establish TF-IDF with Logistic Regression and SVM as baseline models for comparison against the transformer-based multi-task model.
+3.	To evaluate model performance across 3–4 product categories using macro-F1 (sentiment) and MAE (rating), with particular attention to neutral (3-star) reviews.
+4.	To build an interactive dashboard that displays sentiment scores, rating predictions, aspect-level analysis, and prediction explanations through visual charts.
+ 
+
+5.	Existing System
+Over the years, researchers have developed various sentiment analysis systems for e-commerce product reviews. Some use traditional machine learning such as Support Vector Machines , while others employ deep learning models such as CNN-BiLSTM and hybrid feature extraction approaches . More recent systems leverage transformer-based models such as DistilBERT with SVM and BERTurk for multi-domain reviews. However, existing systems have critical limitations. Most are trained on a single product category, limiting their generalization . Neutral sentiment classification remains a major challenge, with many neutral reviews being misclassified. Most systems lack user-friendly web interfaces and process reviews in batches rather than providing interactive analysis. Explainability is largely missing, and key features such as aspect extraction and cross-category rating prediction are often absent. These limitations highlight the need for a complete, practical system with an interactive dashboard, multi-category evaluation, aspect extraction, rating prediction, and explainability features.
+
+6.	Proposed System
+The proposed "E-Commerce Review Analyzer and Product Rating Predictor" addresses the above limitations through a comprehensive, practical, and user-friendly system.
+The system functions as follows: the user submits a product review through an interactive dashboard. The review is pre-processed according to the requirements of each model: standard cleaning (tokenization, stop-word removal, lemmatization) for the TF-IDF baseline, and raw tokenization (no stop-word removal or stemming) for the transformer model.
+Two model types are implemented:
+•	Baseline: TF-IDF vectorization with Logistic Regression and SVM classifiers for both sentiment classification and rating prediction.
+•	Main model: A multi-task learning architecture with a shared RoBERTa encoder and two heads — one for 3-class sentiment classification and one for 5-class rating prediction. A Bi-GRU layer with attention is optionally added between the encoder and heads, and evaluated through ablation.
+The system classifies sentiment as positive, negative, or neutral, predicts ratings from 1 to 5, extracts important product aspects from the reviews, and provides explanations for its predictions. This project differs from existing systems by offering multi-category evaluation, visualizations, explainable predictions, and a multi-task architecture that predicts sentiment and rating simultaneously, avoiding the circular dependency of deriving rating from sentiment.
+
+
+7.	Methodology
+The proposed system follows a step-by-step approach to analyze product reviews and predict ratings using Python, NLTK, PyTorch, scikit-learn, and Streamlit.
+Step 1: Data Collection — Public e-commerce review datasets from Kaggle and Amazon are used, containing product reviews, star ratings, and categories.
+Step 2: Data Preprocessing — Duplicate review texts are removed before splitting. Data is split 70/15/15 into train, validation, and test sets. Two preprocessing pipelines are maintained:
+•	For TF-IDF baseline: lowercasing, punctuation removal, stop-word removal, lemmatization.
+•	For transformer model: raw text with tokenizer-specific handling (no stop-word removal or stemming).
+Step 3: Baseline Models — TF-IDF vectorization with Logistic Regression and SVM classifiers for both sentiment and rating tasks.
+Step 4: Main Model — A multi-task learning model with a shared RoBERTa encoder and two heads:
+•	Sentiment head: 3-class classification (positive, negative, neutral).
+•	Rating head: 5-class classification (1–5).
+Both heads are trained simultaneously with a combined loss function. A Bi-GRU layer with attention is optionally added between the encoder and heads, and evaluated through ablation.
+Step 5: Aspect Extraction and Explainability — Noun phrase and keyword extraction with sentence-level sentiment for aspect analysis. Attention weights and LIME are used for prediction explanations.
+Step 6: Dashboard — A Streamlit-based interface for single-review and batch analysis, displaying sentiment scores, predicted ratings, aspect analysis, and explanations.
+
+ 8.	System Modules
+•	Review Input Module — Accepts single or batch reviews through the dashboard.
+•	Preprocessing Module — Cleans review text using NLTK for the baseline; tokenizer-specific handling for the transformer.
+•	Feature Extraction Module — TF-IDF for baseline; contextual embeddings for the transformer model.
+•	Baseline Module — TF-IDF + Logistic Regression/SVM for comparison.
+•	Multi-Task Model Module — Shared RoBERTa encoder with sentiment and rating heads.
+•	Aspect Extraction Module — Identifies product features and their associated sentiments.
+•	Explainability Module — Highlights influential words using attention weights and LIME.
+•	Dashboard Module — Displays results with visualizations using Streamlit.
+
+9.	Tools / Technologies Used
+•	Programming Language: Python
+•	NLP Library: NLTK (baseline preprocessing only), Hugging Face Tokenizers (transformer preprocessing)
+•	Machine Learning: scikit-learn (TF-IDF baseline)
+•	Deep Learning: PyTorch, Hugging Face Transformers (RoBERTa)
+•	Web Framework: Streamlit
+•	Visualization: Matplotlib, Plotly
+•	Development: Google Colab / Jupyter Notebook, GitHub
+
+10.	Expected Outcome
+The expected outcome of this project is a fully functional review analysis dashboard that displays sentiment scores and rating predictions for e-commerce product reviews. The system will help businesses quickly understand customer feedback by automatically classifying reviews as positive, negative, or neutral. It will also predict star ratings from 1 to 5 based on review text, providing a quick snapshot of product quality.
+The dashboard will visualize sentiment distribution through charts, display key product aspects with their associated sentiments, and generate word clouds to highlight common words across review categories. The system will also provide explanations for both sentiment and rating predictions, showing which words influenced the decision, helping users trust and understand the results.
+The system will be evaluated using macro-F1 for sentiment classification and accuracy or macro-F1 for rating prediction across 3–4 product categories. Baseline models (TF-IDF with Logistic Regression and SVM) will be compared against the transformer-based multi-task model to demonstrate the improvement in performance.
+This project will reduce the time businesses spend manually analysing reviews, enable faster response to customer issues, and support data-driven decision-making for product improvement and customer satisfaction.
+
+11.	Scope and Future Enhancements
+•	Multilingual Support — Extending the system to analyse reviews in multiple languages.
+•	Real-Time Social Media Monitoring — Integrating with social media feeds.
+•	Mobile Application Integration — Developing a mobile version of the dashboard.
+•	Fake Review Detection — Implementing techniques to identify fake or manipulative reviews. This is placed under future enhancements because no labelled fake-review data is currently available.
+•	Cross-Domain Transfer Learning — Extending the system to additional product categories using transfer learning, beyond the cross-category evaluation performed in the current system.
+12.	Conclusion
+The E-Commerce Review Analyzer and Product Rating Predictor is designed to help businesses automatically understand customer feedback from product reviews. The system classifies sentiments as positive, negative, or neutral, predicts star ratings from 1 to 5, extracts key product aspects, and presents insights through an interactive dashboard. By using a multi-task learning model with a shared RoBERTa encoder and two task-specific heads, the system achieves accurate sentiment classification and reliable rating predictions while avoiding the circular dependency of deriving rating from sentiment. Explainability features show which words influenced predictions, helping users trust the system's decisions. This project demonstrates how deep learning and NLP techniques can be applied to solve real-world business problems.
+
+13.	References
+1.	M. Geetha and N. Vimala, "Hybrid transformer-based deep learning model analysis for review classification in E-commerce," Journal of Neonatal Surgery, vol. 14, no. 17S, pp. 872–884, Apr. 2025. (Note: Verify this reference — the journal name appears unrelated to the topic.)
+2.	L. H. Alzubaidi et al., "E-commerce Product Review Analysis based on Multi-class Support Vector Machine," in 2023 International Conference on Ambient Intelligence, Knowledge Informatics and Industrial Electronics (AIKIIE), 2023, pp. 1–6.
+3.	D. Geethanjali and P. Suresh, "Sentiment Analysis and Classification on Amazon Products using Improved Support Vector Machine for Multiclass Classification," International Journal on Recent and Innovation Trends in Computing and Communication, vol. 11, no. 10s, pp. 1–8, Sep. 2023.
+4.	Z. Zhao, W. Liu, and K. Wang, "Research on sentiment analysis method of opinion mining based on multi-model fusion transfer learning," Journal of Big Data, vol. 10, p. 155, 2023.
+5.	G. Kaur and A. Sharma, "A deep learning-based model using hybrid feature extraction approach for consumer sentiment analysis," Journal of Big Data, vol. 10, p. 5, 2023.
+6.	[Author names missing], "Classification of Ecommerce Customer Reviews Using DistilBERT with Support Vector Machine," in 2024 International Conference on Integrated Intelligence and Communication Systems (ICIICS), Nov. 2024. (Note: Add author names.)
+7.	I. Karabey Aksakalli et al., "BERTurk-Based Sentiment Analysis on E-Commerce Multi Domain Product Reviews," Afyon Kocatepe Üniversitesi Fen Ve Mühendislik Bilimleri Dergisi, vol. 25, no. 3, pp. 497–509, 2025.
+8.	K. Li, C.-Y. Chen, and Z.-L. Zhang, "Mining online reviews for ranking products: A novel method based on multiple classifiers and interval-valued intuitionistic fuzzy TOPSIS," Applied Soft Computing, vol. 145, p. 110567, 2023. (Note: Add volume and page numbers if available.)
+9.	Y. Hou et al., "Bridging Language and Items for Retrieval and Recommendation," arXiv preprint, 2024. (Amazon Reviews 2023 dataset)
+
