@@ -1,0 +1,19 @@
+# Data files (too large for GitHub)
+data/*.csv
+!data/sample_reviews.csv
+
+# Model files
+*.pkl
+*.h5
+*.pt
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Colab
+content/
+
+# OS
+.DS_Store
