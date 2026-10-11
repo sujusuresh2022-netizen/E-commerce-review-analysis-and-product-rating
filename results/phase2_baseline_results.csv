@@ -1,0 +1,5 @@
+Model,Task,Accuracy,Macro-F1,MAE
+LR + TF-IDF,Sentiment,0.66,0.6169,
+SVM + TF-IDF,Sentiment,0.66,0.5986,
+LR + TF-IDF,Rating,0.47,0.47,0.7608
+SVM + TF-IDF,Rating,0.44,0.43,0.8308
